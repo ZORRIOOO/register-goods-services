@@ -12,53 +12,28 @@ namespace registergoodsservices.Controllers
             
         }
 
-        public Task<List<Product>> GetProductsAsyncFiltered(string name)
+        public List<Product> GetProductsAsyncFiltered(
+            int pageNumber,
+            string? name,
+            int? organisation_id,
+            float[]? price,
+            int pageSize = 10
+        )
         {
-            return _database.Table<Product>()
-                .Where(e => (e.Name == name))
-                .ToListAsync();
-        }
+            var result = _database.Table<Product>();
 
-        public Task<List<Product>> GetProductsAsyncFiltered(int organisation_id)
-        {
-            return _database.Table<Product>()
-                .Where(e => (e.Organisation_id == organisation_id))
-                .ToListAsync();
-        }
+            if(!name.Equals(null))
+                result.Where(e => (e.Name == name));
 
-        public Task<List<Product>> GetProductsAsyncFiltered(float minPrice, float maxPrice)
-        {
-            return _database.Table<Product>()
-                .Where(e => ((e.Price >= minPrice) && (e.Price <= maxPrice)))
-                .ToListAsync();
-        }
+            if (!organisation_id.Equals(null))
+                result.Where(e => (e.Organisation_id == organisation_id));
 
-        public Task<List<Product>> GetProductsAsyncFiltered(string name, int organisation_id)
-        {
-            return _database.Table<Product>()
-                .Where(
-                    e =>
-                        (e.Name == name)
-                        && (e.Organisation_id == organisation_id)
-                )
-                .ToListAsync();
-        }
-
-        public Task<List<Product>> GetProductsAsyncFiltered(
-            string name,
-            int organisation_id,
-            float minPrice,
-            float maxPrice
-        ){
-            return _database.Table<Product>()
-                .Where(
-                    e =>
-                        (e.Name == name)
-                        && (e.Organisation_id == organisation_id)
-                        && (e.Price >= minPrice)
-                        && (e.Price <= maxPrice)
-                )
-                .ToListAsync();
+            if (!price.Equals(null))
+                result.Where(
+                    e => (e.Price >= price[0])
+                    && (e.Price <= price[1])
+                );
+            return GetPage(result.ToListAsync().Result, pageNumber, pageSize);
         }
     }
 }
