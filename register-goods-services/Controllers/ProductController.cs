@@ -42,7 +42,7 @@ namespace registergoodsservices.Controllers
                         (e.Name == name)
                         && (e.Organisation_id == organisation_id)
                         && (e.Price >= minPrice)
-                        && (e.Price >= organisation_id)
+                        && (e.Price <= maxPrice)
                 )
                 .ToListAsync();
         }
