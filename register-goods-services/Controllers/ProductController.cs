@@ -15,7 +15,7 @@ namespace registergoodsservices.Controllers
         public List<Product> GetProductsAsyncFiltered(
             int pageNumber,
             string? name,
-            int? organisation_id,
+            int? organisationId,
             float[]? price,
             int pageSize = 10
         )
@@ -25,8 +25,8 @@ namespace registergoodsservices.Controllers
             if(!name.Equals(null))
                 result.Where(e => (e.Name == name));
 
-            if (!organisation_id.Equals(null))
-                result.Where(e => (e.Organisation_id == organisation_id));
+            if (!organisationId.Equals(null))
+                result.Where(e => (e.OrganisationId == organisationId));
 
             if (!price.Equals(null))
                 result.Where(
