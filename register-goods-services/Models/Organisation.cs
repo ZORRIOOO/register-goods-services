@@ -17,6 +17,6 @@ namespace registergoodsservices
         public int Address { get; set; }
         public int Inn { get; set; }
         public int Kpp { get; set; }
-        public OrganisationTypes Organisation_type { get; set; }
+        public OrganisationTypes OrganisationType { get; set; }
     }
 }

@@ -107,6 +107,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Models\Organisation.cs" />
     <Compile Include="Controllers\OrganisationController.cs" />
+    <Compile Include="Models\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
