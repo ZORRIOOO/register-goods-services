@@ -38,6 +38,11 @@ namespace registergoodsservices
             return _database.InsertAsync(record);
         }
 
+        public Task<int> UpdateRecordAsync(T record)
+        {
+            return _database.UpdateAsync(record);
+        }
+
         public void DeleteRecordasync(T record)
         {
             _database.DeleteAsync(record);
